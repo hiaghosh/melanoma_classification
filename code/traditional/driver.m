@@ -9,7 +9,7 @@ numImages = length(images);
 
 scores = zeros(numImages,6);
 
-for i = 1:1000
+for i = 300:400
     disp(i);
     imageName = images(i).name(1:end-4);
     thisImage = fullfile(dataDir, strcat(imageName, '.jpg'));
@@ -18,8 +18,8 @@ for i = 1:1000
     [h,w,n] = size(outs);
     for out = 1:n
         gt = imread(fullfile(testDir, strcat(imageName, '_segmentation.png')));
-        %subplot(n,2,out*2-1), imshow(gt);
-        %subplot(n,2,out*2), imshow(outs(:,:,out));
+        subplot(n,2,out*2-1), imshow(gt);
+        subplot(n,2,out*2), imshow(outs(:,:,out));
         scores(i,out) = scores(i,out) + testrep(outs(:,:,out), gt);
     end
 end
